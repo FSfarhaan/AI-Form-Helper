@@ -26,7 +26,7 @@ The extension will be available on the Chrome Web Store soon.
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/FSfarhaan/ai-form-helper.git
+    git clone https://github.com/FSfarhaan/AI-Form-Helper.git
     ```
 
 2. **Get a Groq API Key**:
