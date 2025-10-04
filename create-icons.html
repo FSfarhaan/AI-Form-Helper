@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Icon Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    canvas {
+      margin: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Icon Generator for AI Form Filler</h1>
+  <p>Click the button to download all three icon sizes</p>
+  <button onclick="generateIcons()">Generate & Download Icons</button>
+  
+  <div id="canvases"></div>
+
+  <script>
+    function generateIcons() {
+      const sizes = [16, 48, 128];
+      const container = document.getElementById('canvases');
+      container.innerHTML = '';
+      
+      sizes.forEach(size => {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        
+        // Draw gradient background
+        const gradient = ctx.createLinearGradient(0, 0, size, size);
+        gradient.addColorStop(0, '#667eea');
+        gradient.addColorStop(1, '#764ba2');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, size, size);
+        
+        // Draw "AI" text
+        ctx.fillStyle = 'white';
+        ctx.font = `bold ${size * 0.4}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('AI', size / 2, size / 2);
+        
+        // Download
+        canvas.toBlob(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `icon${size}.png`;
+          a.click();
+          URL.revokeObjectURL(url);
+        });
+        
+        container.appendChild(canvas);
+      });
+      
+      alert('Icons downloaded! Check your downloads folder for icon16.png, icon48.png, and icon128.png');
+    }
+  </script>
+</body>
+</html>
